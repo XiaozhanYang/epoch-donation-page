@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title id='id-title'>支付页面已取消</title>
+    <meta name="description" content="Donation checkout canceled page" />
+
+    <meta name="viewport" content="width=device-width" />
+
+    <link rel="icon" href="https://www.epochtimes.com/assets/themes/djy/images/favicon.png" type="image/png" />
+    <link rel="stylesheet" href="css/normalize.css" />
+    <link rel="stylesheet" href="css/global.css" />
+    <link rel="stylesheet" href="css/customize.css" />
+    <script src="https://js.stripe.com/v3/"></script>
+  </head>
+
+  <body>
+    <div class="sr-root">
+      <div class="sr-main">
+        <header class="sr-header">
+          <div class="sr-header__logo_language">
+            <div class="sr-header-block">
+              <img src="Epoch Media UK - Logo.png" alt="Epoch Times Logo" height="100%">
+            </div>
+            <div class="sr-header-block">
+              <div class="language-setter">
+                <button class="language-btn language-btn-left" id="lang-chinese">中</button>
+                <button class="language-btn language-btn-right" id="lang-english">EN</button>
+              </div>
+            </div>
+          </div>
+        </header>
+        <div class="sr-payment-summary completed-view">
+          <h1 class="bigger-margin-bottom" id="id-payment-status">支付页面已取消</h1>
+          <h4 class="bigger-margin-top" id="id-email-confirmation">您可<a href="https://donation.dajiyuan.co.uk/">点击此处</a>来重新进行捐助。若有疑问，请通过以下方式联系我们。</h4>
+          <h4 class="bigger-margin-top" id="id-contact-information">电话：&#8288;+44(0)77 629 62326，邮&#8288;箱：&#8288;accounts_uk@epochtimes.com</h4>
+        </div>
+      <div class="sr-content">
+        <div class="pasha-image-stack">
+          <img
+            src="https://picsum.photos/280/320?random=1"
+            width="140"
+            height="160"
+          />
+          <img
+            src="https://picsum.photos/280/320?random=2"
+            width="140"
+            height="160"
+          />
+          <img
+            src="https://picsum.photos/280/320?random=3"
+            width="140"
+            height="160"
+          />
+          <img
+            src="https://picsum.photos/280/320?random=4"
+            width="140"
+            height="160"
+          />
+        </div>
+      </div>
+    </div>
+
+    <script src="configuration.js"></script>
+    <script>
+
+      var stripe = Stripe(PUBLISHABLE_KEY);
+      var urlParams = new URLSearchParams(window.location.search);
+
+      if (urlParams.has("session_id")) {
+        document.getElementById("session").textContent = urlParams.get(
+          "session_id"
+        );
+      }
+      // Language that will be used in the checkout page
+      var browserLanguage = navigator.language;
+      var checkoutLanguage;
+
+      if (urlParams.has("checkout_language")) {
+        checkoutLanguage = urlParams.get("checkout_language");
+      } else {
+        checkoutLanguage = browserLanguage;
+      }
+
+      // Language setting button elements
+      var langEnglishBtn = document.getElementById("lang-english");
+      var langChineseBtn = document.getElementById("lang-chinese");
+
+      // Document elements affected by languages
+      pageTitle = document.getElementById('id-title');
+      paymentStatus = document.getElementById('id-payment-status');
+      emailConfirmation = document.getElementById('id-email-confirmation');
+      contactInformation = document.getElementById('id-contact-information');
+      checkoutSessionId = document.getElementById('id-checkout-session-id');
+
+      // Define the basic setting functions for English and Chinese
+
+      function setContectLanguageAsChinese() {
+
+          // Update the button style
+        langEnglishBtn.style.background = '#f1f1f1';
+        langEnglishBtn.style.zIndex = '0';
+        langChineseBtn.style.background = 'white';
+        langChineseBtn.style.zIndex = '9';
+
+        // Update main content
+        pageTitle.textContent = '支付页面已取消';
+        paymentStatus.textContent = '支付页面已取消';
+        emailConfirmation.innerHTML = `您可<a href="https://${SUBDOMAIN}/?checkout_language=${checkoutLanguage}">点击此处</a>来重新进行捐助。若有疑问，请通过以下方式联系我们。`;
+        contactInformation.textContent = '电话：'+TELEPHONE+'，邮箱：'+EMAIL; 
+      }
+
+      function setContectLanguageAsEnglish() {
+
+        // Update the button style
+        langChineseBtn.style.background = '#f1f1f1';
+        langChineseBtn.style.zIndex = '0';
+        langEnglishBtn.style.background = 'white';
+        langEnglishBtn.style.zIndex = '9';
+
+        // Update main content
+        pageTitle.textContent = 'Donation Payment Cancelled';
+        paymentStatus.textContent = 'Donation payment page cancelled';
+        emailConfirmation.innerHTML = `You can <a href="https://${SUBDOMAIN}/?checkout_language=${checkoutLanguage}">click here</a> to start donating again. If you have any question, please contact us by the following information.`;
+        contactInformation.textContent = `Tel: ${TELEPHONE}，Email: ${EMAIL}`;
+      }
+
+      // Initialize the page language by url variable or browser setting
+      if (checkoutLanguage.includes("zh")) {
+        setContectLanguageAsChinese()
+      } else {
+        setContectLanguageAsEnglish();
+      } 
+
+      // Language button handler 
+      var updateLanguage = function(evt) {
+        if (evt && evt.type === "keypress" && evt.keyCode !== 13) {
+          return;
+        }
+
+        var buttonID = evt.target.id;
+
+        if (buttonID === "lang-chinese") {
+          setContectLanguageAsChinese()
+        } 
+
+        if (buttonID === "lang-english") {
+          setContectLanguageAsEnglish()
+        }
+      };
+
+      // React to language button
+      Array.from(document.getElementsByClassName("language-btn")).forEach(
+        element => {
+          element.addEventListener("click", updateLanguage);
+        }
+      );
+
+    </script>
+  </body>
+</html>

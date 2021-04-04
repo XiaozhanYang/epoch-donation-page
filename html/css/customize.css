@@ -1,0 +1,141 @@
+
+/* Float four columns side by side */
+.column {
+    float: left;
+    width: 50%;
+    padding: 0 20px;
+    margin-bottom: 30px;
+  }
+  
+  
+  /* Remove extra left and right margins, due to padding */
+  .row {margin: 0 -20px;}
+  
+  /* Clear floats after the columns */
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+  /* Responsive columns */
+  @media screen and (max-width: 600px) {
+    .column {
+      width: 100%;
+      display: block;
+      margin-bottom: 30px;
+    }
+  }
+
+  /* Prevent fontsize on iphone from adjusting */
+  html {
+    -webkit-text-size-adjust: 100%;
+    }   
+
+  /* Configuration for iphone */
+
+/*
+  @media only screen 
+    and (min-device-width : 375px) 
+    and (max-device-width : 667px) 
+    and (orientation : landscape) 
+    and (-webkit-min-device-pixel-ratio : 2) { 
+        .column {
+            width: 50%;
+            display: block;
+            margin-bottom: 60px;
+          }
+    }
+*/
+
+/*
+  @media only screen 
+    and (min-device-width : 375px) 
+    and (max-device-width : 667px) 
+    and (orientation : portrait) 
+    and (-webkit-min-device-pixel-ratio : 2) { 
+        .column {
+            width: 100%;
+            margin-bottom: 60px;
+          }
+          
+    }
+*/  
+
+  /* Style the counter cards */
+  .card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    padding: 16px;
+    text-align: center;
+    background-color: #f1f1f1;
+  }
+
+  /* Style for the success and cancel page */
+
+  .bigger-margin-top {
+      margin-top: 3px;
+      line-height: 2.6;
+  }
+  .bigger-margin-bottom {
+    margin-bottom: 10px;
+    line-height: 2.6;
+  }
+  p.sr-checkout-session-id-text {
+    color: rgba(0, 0, 0, 0.4);
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 17px;
+    margin-top: 12px;
+    margin-left: 5px;
+    margin-bottom: 5px;
+  }
+  .sr-checkout-session-id-title {
+    color: rgba(0, 0, 0, 0.4);
+    font-size: 13px;
+    font-weight: bold;
+    line-height: 17px;
+    margin-top: 12px;
+    margin-left: 5px;
+    margin-bottom: 10px;
+  }
+
+  .sr-checkout-session-id-span{
+    display: block;
+    word-break: break-all;
+  }
+  /*
+  body {
+    background-image: url("../background-image.png");
+    background-size: cover;
+  }
+  */
+
+  /* Style for increment buttons and language buttons */
+
+  .language-setter .language-btn-left,
+  .quantity-setter .increment-btn-left {
+    border-radius: 6px 0px 0px 6px;
+  }
+
+  .language-setter .language-btn-right,
+  .quantity-setter .increment-btn-right {
+    border-radius: 0px 6px 6px 0px;
+  }
+
+  /* Style for words to readers */
+
+  .word-to-readers {
+    float: left;
+    width: 100%;
+    padding: 0 40px;
+    margin-bottom: 30px;
+  }
+
+  .word-to-readers h1 {
+    text-align: left;
+    padding-bottom: 18px;
+  }
+
+  .word-to-readers p {
+  line-height: 1.6;
+  }
