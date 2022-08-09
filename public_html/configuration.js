@@ -1,6 +1,6 @@
 // Contact information
 var EMAIL = 'accounts_uk@epochtimes.com';
-var TELEPHONE = '+44(0)203 585 4149';
+var TELEPHONE = '+44(0)203 485 4149';
 var BANK_DETAILS = 'Name：Epoch Media UK, S\C: 20-45-45, ACC: 1323 6781';
 var SUBDOMAIN = 'donation.dajiyuan.co.uk';
 
